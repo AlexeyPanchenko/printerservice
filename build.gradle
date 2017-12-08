@@ -2,21 +2,14 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.1.51'
-        appcompat_version = '26.1.0'
-        retrofit_version = '2.3.0'
-        gson_version = '2.8.2'
-        log_interceptor_version = '3.9.1'
-        rxkotlin_version = '2.2.0'
-        dagger_version = '2.13'
-        arch_version = '1.0.0'
+        kotlin_version = '1.2.0'
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.novoda:bintray-release:0.8.0'
 
@@ -26,9 +19,17 @@ buildscript {
 }
 
 allprojects {
+    tasks.withType(Javadoc) {
+        excludes = ['**/*.kt']
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
     repositories {
         google()
         jcenter()
+        maven {
+            url  "https://dl.bintray.com/alexeypanchenko/maven"
+        }
     }
 }
 

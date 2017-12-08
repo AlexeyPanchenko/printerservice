@@ -7,10 +7,13 @@ import android.print.PageRange
 import android.print.PrintAttributes
 import android.print.PrintDocumentAdapter
 import android.print.PrintDocumentInfo
+import java.io.FileDescriptor
 import java.io.FileOutputStream
-import java.io.InputStream
 
-internal class PrintAdapter(private val inputStream: InputStream) : PrintDocumentAdapter() {
+
+abstract class PrintAdapter : PrintDocumentAdapter() {
+
+    abstract fun write(fileDescriptor: FileDescriptor)
 
     override fun onLayout(oldAttributes: PrintAttributes?, newAttributes: PrintAttributes, cancellationSignal: CancellationSignal, callback: LayoutResultCallback, extras: Bundle?) {
         if (cancellationSignal.isCanceled) {
@@ -30,7 +33,7 @@ internal class PrintAdapter(private val inputStream: InputStream) : PrintDocumen
     }
 
     override fun onWrite(pages: Array<out PageRange>?, destination: ParcelFileDescriptor, cancellationSignal: CancellationSignal?, callback: WriteResultCallback) {
-        FileOutputStream(destination.fileDescriptor).write(inputStream)
+        write(destination.fileDescriptor)
         callback.onWriteFinished(arrayOf(PageRange.ALL_PAGES))
     }
 
