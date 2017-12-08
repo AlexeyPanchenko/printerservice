@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PrintExample</string>
+    <string name="action_print">Печать</string>
+</resources>
