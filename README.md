@@ -1,8 +1,8 @@
 # printerservice
-Simple implementation standart android print API for custom documents
+Simple implementation of standard android print API for custom documents
 
 ## dependencies
-In the root build.gradle
+In the root project build.gradle
 ```
 allprojects {
    ...
@@ -14,7 +14,7 @@ allprojects {
     }
 }
 ```
-In the project build.gradle
+In the app module build.gradle
 ```groovy
 compile 'com.github.alexeypanchenko:printerservice:0.0.2'
 ```
