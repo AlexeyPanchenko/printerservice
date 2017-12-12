@@ -1,11 +1,13 @@
 package com.example.print.printexample
 
 import android.os.Bundle
+import android.os.Environment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.print.printerserver.PrintService
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +16,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         fab.setOnClickListener {
-            PrintService(this).print("dsad".byteInputStream())
+            val path = Environment.getExternalStorageDirectory().absolutePath + "/Download/plan.pdf"
+            val file = File(path)
+            val byteArray = file.readBytes()
+            PrintService(this).print(byteArray)
         }
     }
 

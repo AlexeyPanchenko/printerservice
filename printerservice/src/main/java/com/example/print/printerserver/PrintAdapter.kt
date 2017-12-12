@@ -8,7 +8,6 @@ import android.print.PrintAttributes
 import android.print.PrintDocumentAdapter
 import android.print.PrintDocumentInfo
 import java.io.FileDescriptor
-import java.io.FileOutputStream
 
 
 abstract class PrintAdapter : PrintDocumentAdapter() {
@@ -20,33 +19,14 @@ abstract class PrintAdapter : PrintDocumentAdapter() {
             callback.onLayoutCancelled()
             return
         }
-        val pages = computePageCount(newAttributes)
-        if (pages > 0) {
-            val info = PrintDocumentInfo.Builder("file.pdf")
-                    .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
-                    .setPageCount(pages)
-                    .build()
-            callback.onLayoutFinished(info, false)
-        } else {
-            callback.onLayoutFailed("Page count calculation failed.")
-        }
+        val info = PrintDocumentInfo.Builder("file.pdf")
+                .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                .build()
+        callback.onLayoutFinished(info, false)
     }
 
     override fun onWrite(pages: Array<out PageRange>?, destination: ParcelFileDescriptor, cancellationSignal: CancellationSignal?, callback: WriteResultCallback) {
         write(destination.fileDescriptor)
         callback.onWriteFinished(arrayOf(PageRange.ALL_PAGES))
     }
-
-    private fun computePageCount(printAttributes: PrintAttributes): Int {
-        var itemsPerPage = 1
-
-        val pageSize = printAttributes.mediaSize
-        if (!pageSize!!.isPortrait) {
-            itemsPerPage = 1
-        }
-        val printItemCount = getPrintItemCount()
-        return Math.ceil((printItemCount / itemsPerPage).toDouble()).toInt()
-    }
-
-    private fun getPrintItemCount() = 1
 }
