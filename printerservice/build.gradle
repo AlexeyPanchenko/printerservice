@@ -36,7 +36,7 @@ dependencies {
 publish {
     groupId = 'com.github.alexeypanchenko'
     artifactId = 'printerservice'
-    publishVersion = '0.0.2'
+    publishVersion = '0.0.3'
     desc = 'Library that helps print files using standart Android API for printing.'
     uploadName = 'printerservice'
     website = "https://github.com/AlexeyPanchenko/printerservice"
