@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">PrintExample</string>
     <string name="action_print">Печать</string>
+
+    <string name="connect">Connect</string>
+    <string name="discover">Discover</string>
+    <string name="register">Register</string>
+    <string name="send">Send</string>
 </resources>

@@ -16,5 +16,5 @@ allprojects {
 ```
 In the app module build.gradle
 ```groovy
-compile 'com.github.alexeypanchenko:printerservice:0.0.2'
+compile 'com.github.alexeypanchenko:printerservice:0.0.4'
 ```

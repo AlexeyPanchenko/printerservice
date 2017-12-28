@@ -28,6 +28,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.0.0'
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -36,7 +37,7 @@ dependencies {
 publish {
     groupId = 'com.github.alexeypanchenko'
     artifactId = 'printerservice'
-    publishVersion = '0.0.3'
+    publishVersion = '0.0.4'
     desc = 'Library that helps print files using standart Android API for printing.'
     uploadName = 'printerservice'
     website = "https://github.com/AlexeyPanchenko/printerservice"
