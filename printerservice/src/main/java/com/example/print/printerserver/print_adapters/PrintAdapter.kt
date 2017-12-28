@@ -1,4 +1,4 @@
-package com.example.print.printerserver
+package com.example.print.printerserver.print_adapters
 
 import android.os.Bundle
 import android.os.CancellationSignal
@@ -10,7 +10,7 @@ import android.print.PrintDocumentInfo
 import java.io.FileDescriptor
 
 
-abstract class PrintAdapter : PrintDocumentAdapter() {
+internal abstract class PrintAdapter : PrintDocumentAdapter() {
 
     abstract fun write(fileDescriptor: FileDescriptor)
 
