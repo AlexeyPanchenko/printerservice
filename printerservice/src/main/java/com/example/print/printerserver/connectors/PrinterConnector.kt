@@ -4,7 +4,6 @@ import io.reactivex.Single
 import java.io.*
 import java.net.Socket
 
-
 internal abstract class PrinterConnector {
 
     abstract fun writeData(output: DataOutputStream?)

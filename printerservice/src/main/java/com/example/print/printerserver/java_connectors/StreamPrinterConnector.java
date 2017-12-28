@@ -1,6 +1,5 @@
 package com.example.print.printerserver.java_connectors;
 
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
