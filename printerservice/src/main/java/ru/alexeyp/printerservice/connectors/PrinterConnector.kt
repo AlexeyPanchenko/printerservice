@@ -1,8 +1,11 @@
 package ru.alexeyp.printerservice.connectors
 
 import io.reactivex.Single
+import ru.alexeyp.printerservice.PrintFailedException
 import java.io.*
+import java.net.ConnectException
 import java.net.Socket
+import java.net.UnknownHostException
 
 internal abstract class PrinterConnector {
 
@@ -17,8 +20,12 @@ internal abstract class PrinterConnector {
                         emitter.onSuccess("Success printing")
                     }
                 }
-            } catch (e: Exception) {
-                emitter.onError(e)
+            } catch (e: UnknownHostException) {
+                emitter.onError(PrintFailedException("Unknown host : ip $ip, (port $port)"))
+            } catch (e: ConnectException) {
+                emitter.onError(PrintFailedException("Failed to connect: ip $ip, (port $port)"))
+            } catch (e: IOException) {
+                emitter.onError(PrintFailedException("Error during write data"))
             }
         }
     }

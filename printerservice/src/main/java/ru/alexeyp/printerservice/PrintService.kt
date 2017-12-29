@@ -83,7 +83,7 @@ class PrintService(private val context: Context) : IPrintService {
     }
 
     override fun print(ip: String, port: Int, data: File, filename: String, paperSize: PaperSize, copies: Int): Single<String> {
-        return FilePrinterConnector(data).print(ip, port, filename, paperSize, copies)
+        return FilePrinterConnector(data).print(ip, port, filename, paperSize, copies).timeout(4000, TimeUnit.MILLISECONDS)
     }
 
     override fun print(ip: String, port: Int, data: InputStream, filename: String, paperSize: PaperSize, copies: Int): Single<String> {
