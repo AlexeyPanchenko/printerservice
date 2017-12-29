@@ -4,10 +4,10 @@ import android.content.Context
 import android.net.nsd.NsdManager
 import android.print.PrintManager
 import android.support.v7.app.AppCompatActivity
-import com.example.print.printerserver.java_connectors.BytesPrinterConnector
-import com.example.print.printerserver.java_connectors.FilePrinterConnector
-import com.example.print.printerserver.java_connectors.PaperSize
-import com.example.print.printerserver.java_connectors.StreamPrinterConnector
+import com.example.print.printerserver.connectors.BytesPrinterConnector
+import com.example.print.printerserver.connectors.FilePrinterConnector
+import com.example.print.printerserver.connectors.PaperSize
+import com.example.print.printerserver.connectors.StreamPrinterConnector
 import com.example.print.printerserver.model.PrinterInfo
 import com.example.print.printerserver.print_adapters.ByteArrayPrintAdapter
 import com.example.print.printerserver.print_adapters.FilePrintAdapter
@@ -17,7 +17,6 @@ import io.reactivex.Single
 import java.io.File
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
-
 
 interface IPrintService {
 
