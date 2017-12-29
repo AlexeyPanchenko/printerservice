@@ -26,12 +26,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
-            printService.findPrinters()
+           /* printService.findPrinters()
                     .subscribe(
                             { log("Printers = ${Gson().toJson(it)}")
                                 print(it.first { !it.name.contains("HP") })
                             },
-                            { log("Exception = $it") })
+                            { log("Exception = $it") })*/
+            printService.showDocumentPreview(File("${Environment.getExternalStorageDirectory()}/teste.pdf"))
         }
     }
 

@@ -1,4 +1,4 @@
-package com.alexeyp.printerserver;
+package ru.alexeyp.printerservice;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.printerserver.test", appContext.getPackageName());
+        assertEquals("com.example.printerservice.test", appContext.getPackageName());
     }
 }

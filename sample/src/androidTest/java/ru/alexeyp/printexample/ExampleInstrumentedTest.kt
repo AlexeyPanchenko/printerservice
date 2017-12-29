@@ -1,4 +1,4 @@
-package com.alexeyp.print.printexample
+package ru.alexeyp.printexample
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

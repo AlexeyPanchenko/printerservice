@@ -1,4 +1,4 @@
-package com.alexeyp.printerserver;
+package ru.alexeyp.printerservice;
 
 import org.junit.Test;
 

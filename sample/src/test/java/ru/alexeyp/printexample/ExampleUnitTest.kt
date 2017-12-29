@@ -1,4 +1,4 @@
-package com.alexeyp.print.printexample
+package ru.alexeyp.printexample
 
 import org.junit.Test
 
