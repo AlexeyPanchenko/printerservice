@@ -22,7 +22,7 @@ In the app module build.gradle
 compile 'com.github.alexeypanchenko:printerservice:0.0.5'
 ```
 ## usage
-#####Show preview document, using standard android print tools
+##### Show preview document, using standard android print tools
 ```kotlin
 import ru.alexeyp.printerserver.PrintService
     
@@ -31,7 +31,7 @@ fun showPreview() {
     service.showDocumentPreview(file, name)  // default name = "Document" 
 }
 ```
-#####Find printer, return `Single<List<PrinterInfo>>`
+##### Find printer, return `Single<List<PrinterInfo>>`
 ```kotlin
 import ru.alexeyp.printerserver.PrintService
     
@@ -42,11 +42,11 @@ fun findPrinters() {
            .subscribe { printers -> }
 }
 ```
-#####Printer model
+##### Printer model
 ```kotlin
 data class PrinterInfo(val name: String, val ip: String, val port: Int)
 ```
-#####Dispatch data to printer return `Single<String>`
+##### Dispatch data to printer return `Single<String>`
 ```kotlin
 import ru.alexeyp.printerserver.PrintService
 import ru.alexeyp.printerserver.connectors.PaperSize
