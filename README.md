@@ -6,7 +6,7 @@
 
 ## dependencies
 In the root project build.gradle
-```
+```groovy
 allprojects {
    ...
     repositories {
@@ -19,21 +19,21 @@ allprojects {
 ```
 In the app module build.gradle
 ```groovy
-compile 'com.github.alexeypanchenko:printerservice:0.0.4'
+compile 'com.github.alexeypanchenko:printerservice:0.0.5'
 ```
 ## usage
-Show preview document, using standard android print tools
+#####Show preview document, using standard android print tools
 ```kotlin
-import com.example.print.printerserver.PrintService
+import ru.alexeyp.printerserver.PrintService
     
 fun showPreview() {
     val service = PrintService(context)
     service.showDocumentPreview(file, name)  // default name = "Document" 
 }
 ```
-Find printer, return `Single<List<PrinterInfo>>`
+#####Find printer, return `Single<List<PrinterInfo>>`
 ```kotlin
-import com.example.print.printerserver.PrintService
+import ru.alexeyp.printerserver.PrintService
     
 fun findPrinters() {
     val service = PrintService(context)
@@ -42,14 +42,14 @@ fun findPrinters() {
            .subscribe { printers -> }
 }
 ```
-Printer model
+#####Printer model
 ```kotlin
 data class PrinterInfo(val name: String, val ip: String, val port: Int)
 ```
-Dispatch data to printer return `Single<String>`
+#####Dispatch data to printer return `Single<String>`
 ```kotlin
-import com.example.print.printerserver.PrintService
-import com.example.print.printerserver.java_connectors.PaperSize
+import ru.alexeyp.printerserver.PrintService
+import ru.alexeyp.printerserver.connectors.PaperSize
     
 fun print() {
     val service = PrintService(context)
