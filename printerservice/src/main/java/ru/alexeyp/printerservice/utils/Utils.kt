@@ -1,4 +1,4 @@
-package ru.alexeyp.printerserver.utils
+package ru.alexeyp.printerservice.utils
 
 import android.util.Log
 import java.io.File

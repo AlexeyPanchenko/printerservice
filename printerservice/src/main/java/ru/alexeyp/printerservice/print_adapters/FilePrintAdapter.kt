@@ -1,6 +1,6 @@
-package ru.alexeyp.printerserver.print_adapters
+package ru.alexeyp.printerservice.print_adapters
 
-import ru.alexeyp.printerserver.utils.write
+import ru.alexeyp.printerservice.utils.write
 import java.io.File
 import java.io.FileDescriptor
 import java.io.FileOutputStream

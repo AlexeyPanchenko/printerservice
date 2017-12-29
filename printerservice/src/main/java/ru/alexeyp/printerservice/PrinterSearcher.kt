@@ -1,10 +1,10 @@
-package ru.alexeyp.printerserver
+package ru.alexeyp.printerservice
 
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
 import android.os.Handler
-import ru.alexeyp.printerserver.model.PrinterInfo
-import ru.alexeyp.printerserver.utils.log
+import ru.alexeyp.printerservice.model.PrinterInfo
+import ru.alexeyp.printerservice.utils.log
 import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter

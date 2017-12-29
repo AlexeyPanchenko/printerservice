@@ -1,4 +1,4 @@
-package ru.alexeyp.printerserver.connectors
+package ru.alexeyp.printerservice.connectors
 
 import java.io.DataOutputStream
 

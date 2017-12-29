@@ -24,7 +24,7 @@ compile 'com.github.alexeypanchenko:printerservice:0.0.5'
 ## usage
 ##### Show preview document, using standard android print tools
 ```kotlin
-import ru.alexeyp.printerserver.PrintService
+import ru.alexeyp.printerservice.PrintService
     
 fun showPreview() {
     val service = PrintService(context)
@@ -33,7 +33,7 @@ fun showPreview() {
 ```
 ##### Find printer, return `Single<List<PrinterInfo>>`
 ```kotlin
-import ru.alexeyp.printerserver.PrintService
+import ru.alexeyp.printerservice.PrintService
     
 fun findPrinters() {
     val service = PrintService(context)
@@ -48,8 +48,8 @@ data class PrinterInfo(val name: String, val ip: String, val port: Int)
 ```
 ##### Dispatch data to printer return `Single<String>`
 ```kotlin
-import ru.alexeyp.printerserver.PrintService
-import ru.alexeyp.printerserver.connectors.PaperSize
+import ru.alexeyp.printerservice.PrintService
+import ru.alexeyp.printerservice.connectors.PaperSize
     
 fun print() {
     val service = PrintService(context)

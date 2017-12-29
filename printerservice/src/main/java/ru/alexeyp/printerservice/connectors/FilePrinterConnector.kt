@@ -1,6 +1,6 @@
-package ru.alexeyp.printerserver.connectors
+package ru.alexeyp.printerservice.connectors
 
-import ru.alexeyp.printerserver.utils.write
+import ru.alexeyp.printerservice.utils.write
 import java.io.DataOutputStream
 import java.io.File
 

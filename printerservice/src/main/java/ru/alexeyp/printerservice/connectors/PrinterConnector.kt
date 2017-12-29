@@ -1,4 +1,4 @@
-package ru.alexeyp.printerserver.connectors
+package ru.alexeyp.printerservice.connectors
 
 import io.reactivex.Single
 import java.io.*

@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import ru.alexeyp.printerserver.PrintService
-import ru.alexeyp.printerserver.connectors.PaperSize
-import ru.alexeyp.printerserver.model.PrinterInfo
+import ru.alexeyp.printerservice.PrintService
+import ru.alexeyp.printerservice.connectors.PaperSize
+import ru.alexeyp.printerservice.model.PrinterInfo
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
