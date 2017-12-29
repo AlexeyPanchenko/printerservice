@@ -8,11 +8,11 @@ import java.io.OutputStream
 val BUFFER = 8 * 1024
 
 internal fun OutputStream.write(inputStream: InputStream) {
-    inputStream.copyTo(this, bufferSize = BUFFER)
+    inputStream.use { it.copyTo(this, bufferSize = BUFFER) }
 }
 
 internal fun OutputStream.write(file: File) {
-    file.inputStream().copyTo(this, bufferSize = BUFFER)
+    file.inputStream().use { it.copyTo(this, bufferSize = BUFFER) }
 }
 
 fun log(message: String, tag: String = "PrinterService") {

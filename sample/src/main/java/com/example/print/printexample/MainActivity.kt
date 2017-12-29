@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.print.printerserver.PrintService
 import com.example.print.printerserver.connectors.PaperSize
+import com.example.print.printerserver.model.PrinterInfo
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun print(printInfo: com.example.print.printerserver.model.PrinterInfo) {
+    private fun print(printInfo: PrinterInfo) {
         log("Printer = ${Gson().toJson(printInfo)}")
         val file = File("${Environment.getExternalStorageDirectory()}/teste.pdf")
-        printService.print(printInfo.ip, printInfo.port, file.readBytes(), "dsa", PaperSize.A4)
+        printService.print(printInfo.ip, printInfo.port, file.inputStream(), "dsa", PaperSize.A4)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ Toast.makeText(this, it, Toast.LENGTH_LONG).show() }, {
