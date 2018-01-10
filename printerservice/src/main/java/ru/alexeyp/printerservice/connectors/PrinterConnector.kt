@@ -21,7 +21,7 @@ internal abstract class PrinterConnector {
                     }
                 }
             } catch (e: UnknownHostException) {
-                emitter.onError(PrintFailedException("Unknown host : ip $ip, (port $port)"))
+                emitter.onError(PrintFailedException("Unknown host: ip $ip, (port $port)"))
             } catch (e: ConnectException) {
                 emitter.onError(PrintFailedException("Failed to connect: ip $ip, (port $port)"))
             } catch (e: IOException) {

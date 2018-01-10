@@ -1,5 +1,6 @@
 package ru.alexeyp.printexample
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AppCompatActivity
@@ -18,21 +19,23 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     private val printService = PrintService(this)
+    private val file = File("${Environment.getExternalStorageDirectory()}/teste.pdf")
+    private val bitmap = BitmapFactory.decodeStream(file.inputStream())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         fab.setOnClickListener {
             printService.findPrinters()
                     .subscribe( {
                         log("Printers = $it")
-                        print(it.first { !it.name.contains("HP") })
+                        print(it.first { it.name.contains("HP") })
                     }, { log("Exception = $it") })
-            //printService.showDocumentPreview(File("${Environment.getExternalStorageDirectory()}/teste.pdf"))
+
         }
     }
+
 
     private fun print(printInfo: PrinterInfo) {
         log("Printer = $printInfo}")

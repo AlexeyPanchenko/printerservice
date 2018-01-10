@@ -19,7 +19,7 @@ allprojects {
 ```
 In the app module build.gradle
 ```groovy
-compile 'com.github.alexeypanchenko:printerservice:0.0.5'
+compile 'com.github.alexeypanchenko:printerservice:0.0.6'
 ```
 ## usage
 ##### Show preview document, using standard android print tools
@@ -57,7 +57,8 @@ fun print() {
     val filename = "Document"       // default = "Document"
     val paperSize = PaperSize.A4    // default = PaperSize.A4
     val copies = 1                  // default = 1
-    printService.print(printInfo.ip, printInfo.port, file, filename, paperSize, copies)
+    val timeout = 5000L                  // default = 4000L
+    printService.print(printInfo.ip, printInfo.port, file, filename, paperSize, copies, timeout)
             ...
             .subscribe { successMessage -> }
 }
