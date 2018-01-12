@@ -35,9 +35,10 @@ interface IPrintService {
 
     /**
      * Find all printers, available to current network. Timeout for request 3.5 seconds
+     * @param timeout timeout for discovery printers in milliseconds
      * @return Single that provides list of all found printers
      */
-    fun findPrinters(): Single<List<PrinterInfo>>
+    fun findPrinters(timeout: Long = TIMEOUT): Single<List<PrinterInfo>>
 
     /**
      * Send data to printer for printing using IP address and port
@@ -77,11 +78,11 @@ class PrintService(private val context: Context) : IPrintService {
         prepareDocument(name, ByteArrayPrintAdapter(data))
     }
 
-    override fun findPrinters(): Single<List<PrinterInfo>> {
+    override fun findPrinters(timeout: Long): Single<List<PrinterInfo>> {
         val nsdManager = context.getSystemService(Context.NSD_SERVICE) as NsdManager
         return PrinterSearcher(nsdManager)
-                .find()
-                .timeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .find(timeout)
+                .timeout(timeout + 500, TimeUnit.MILLISECONDS)
                 .toList()
     }
 
