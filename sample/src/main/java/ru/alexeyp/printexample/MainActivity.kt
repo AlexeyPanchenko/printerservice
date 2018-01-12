@@ -1,6 +1,5 @@
 package ru.alexeyp.printexample
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AppCompatActivity
@@ -19,8 +18,6 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     private val printService = PrintService(this)
-    private val file = File("${Environment.getExternalStorageDirectory()}/teste.pdf")
-    private val bitmap = BitmapFactory.decodeStream(file.inputStream())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +27,10 @@ class MainActivity : AppCompatActivity() {
             printService.findPrinters()
                     .subscribe( {
                         log("Printers = $it")
-                        print(it.first { it.name.contains("HP") })
-                    }, { log("Exception = $it") })
-
+                        print(it.first { !it.name.contains("HP") })
+                    }, {})
         }
     }
-
 
     private fun print(printInfo: PrinterInfo) {
         log("Printer = $printInfo}")
@@ -55,7 +50,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-            R.id.action_print -> true
+            R.id.action_print -> {
+                Toast.makeText(this, "!", Toast.LENGTH_SHORT).show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
     }
 

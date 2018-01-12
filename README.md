@@ -2,7 +2,8 @@
 * Simple implementation of standard android print API for custom documents.
 * Search printers by Wi-Fi in current network, using NsdManager.DiscoveryListener (`SERVICE_TYPE = "_pdl-datastream._tcp"`). Timeout for search services 3.5 s.
 * Dispatch data(`File`, `InputStream`, `ByteArray`) to printer for printing. Interaction with printer using PJL commands. Tested only .pdf files
-* Search and dispatch use RxJava2 and return Single
+* Work with mobile thermal printers CITIZEN (find printers, print text/Bitmap, customize fonts)
+* Search and dispatch use RxJava2 and return Single/Completable
 
 ## dependencies
 In the root project build.gradle
@@ -19,9 +20,10 @@ allprojects {
 ```
 In the app module build.gradle
 ```groovy
-compile 'com.github.alexeypanchenko:printerservice:0.0.6'
+compile 'com.github.alexeypanchenko:printerservice:0.0.7'
 ```
 ## usage
+### Stationary printers
 ##### Show preview document, using standard android print tools
 ```kotlin
 import ru.alexeyp.printerservice.PrintService
@@ -61,5 +63,54 @@ fun print() {
     printService.print(printInfo.ip, printInfo.port, file, filename, paperSize, copies, timeout)
             ...
             .subscribe { successMessage -> }
+}
+```
+### CITIZEN printers
+##### Find printer (Async), return `Single<List<PrinterInfo>>`
+```kotlin
+import ru.alexeyp.printerservice.citizen.CitizenPrintService
+import ru.alexeyp.printerservice.citizen.PrinterType
+    
+fun findPrinters() {
+    val service = CitizenPrintService(PrinterType.WI_FI)
+    val wifiTimeout = 10    // 1-30, default 5
+    service.findPrinters(context, wifiTimeout)
+           ...
+           .observeOn(AndroidSchedulers.mainThread())
+           .subscribe { printers -> }
+}
+```
+##### Print text (Async), return `Completable`
+```kotlin
+import ru.alexeyp.printerservice.citizen.CitizenPrintService
+import ru.alexeyp.printerservice.citizen.PrinterType
+import ru.alexeyp.printerservice.citizen.CitizenConfig
+    
+fun printText() {
+    val address = "10.10.10.10"  // ip address or bluetooth address
+    val printer = CitizenPrintService(PrinterType.WI_FI).Printer(address)
+    val alignment          // default CitizenConfig.Alignment.CENTER
+    val attributes         // default CitizenConfig.Font.DEFAULT
+    val textSize           // default CitizenConfig.Width.WIDTH1 or CitizenConfig.Height.HEIGHT1
+    printer.printText("text gor printing", alignment, attributes, textSize)
+           ...
+           .observeOn(AndroidSchedulers.mainThread())
+           .subscribe { }
+}
+```
+##### Print bitmap (Async), return `Completable`
+```kotlin
+import ru.alexeyp.printerservice.citizen.CitizenPrintService
+import ru.alexeyp.printerservice.citizen.PrinterType
+import ru.alexeyp.printerservice.citizen.CitizenConfig
+    
+fun printText() {
+    val address = "10.10.10.10"  // ip address or bluetooth address
+    val printer = CitizenPrintService(PrinterType.WI_FI).Printer(address)
+    val alignment          // default CitizenConfig.Alignment.CENTER
+    printer.printBitmap(bitmap, alignment)
+           ...
+           .observeOn(AndroidSchedulers.mainThread())
+           .subscribe { }
 }
 ```

@@ -12,13 +12,13 @@ import io.reactivex.ObservableEmitter
 internal class PrinterSearcher(private val nsdManager: NsdManager) {
 
     private val SERVICE_TYPE = "_pdl-datastream._tcp"
-    private val TIMEOUT = 3500L
 
-    fun find() = Observable.create<PrinterInfo> {
-            nsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, initDiscoveryListener(it))
+    fun find(timeout: Long) = Observable.create<PrinterInfo> {
+
+        nsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, initDiscoveryListener(it, timeout))
     }
 
-    private fun initDiscoveryListener(emitter: ObservableEmitter<PrinterInfo>): NsdManager.DiscoveryListener {
+    private fun initDiscoveryListener(emitter: ObservableEmitter<PrinterInfo>, timeout: Long): NsdManager.DiscoveryListener {
         return object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
                 log("onServiceFound = ${Gson().toJson(serviceInfo)}")
@@ -37,13 +37,7 @@ internal class PrinterSearcher(private val nsdManager: NsdManager) {
             }
 
             override fun onDiscoveryStarted(serviceType: String?) {
-                Handler().postDelayed({
-                    try {
-                        stopDiscovery()
-                    } catch (e: Exception) {
-                        emitter.onError(e)
-                    }
-                }, TIMEOUT)
+                Handler().postDelayed({ stopDiscovery() }, timeout)
             }
 
             override fun onDiscoveryStopped(serviceType: String?) {
@@ -53,11 +47,15 @@ internal class PrinterSearcher(private val nsdManager: NsdManager) {
 
             override fun onServiceLost(serviceInfo: NsdServiceInfo?) {
                 log("onServiceLost = ${Gson().toJson(serviceInfo)}")
-                stopDiscovery()
             }
 
             fun stopDiscovery() {
-                nsdManager.stopServiceDiscovery(this)
+                try {
+                    nsdManager.stopServiceDiscovery(this)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
             }
         }
     }
