@@ -82,6 +82,7 @@ class PrintService(private val context: Context) : IPrintService {
         val nsdManager = context.getSystemService(Context.NSD_SERVICE) as NsdManager
         return PrinterSearcher(nsdManager)
                 .find(timeout)
+                .distinct()
                 .timeout(timeout + 500, TimeUnit.MILLISECONDS)
                 .toList()
     }

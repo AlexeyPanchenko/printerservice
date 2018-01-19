@@ -64,6 +64,7 @@ internal class PrinterSearcher(private val nsdManager: NsdManager) {
         return object : NsdManager.ResolveListener {
             override fun onResolveFailed(serviceInfo: NsdServiceInfo, errorCode: Int) {
                 log("onResolveFailed = ${Gson().toJson(serviceInfo)}")
+                emitter.onNext(PrinterInfo(serviceInfo.serviceName, serviceInfo.host.hostName, serviceInfo.port))
             }
 
             override fun onServiceResolved(serviceInfo: NsdServiceInfo) {

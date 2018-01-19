@@ -20,7 +20,7 @@ allprojects {
 ```
 In the app module build.gradle
 ```groovy
-compile 'com.github.alexeypanchenko:printerservice:0.0.7'
+compile 'com.github.alexeypanchenko:printerservice:0.0.8'
 ```
 ## usage
 ### Stationary printers
